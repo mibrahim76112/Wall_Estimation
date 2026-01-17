@@ -1,0 +1,8 @@
+﻿.venv/
+output/
+**/model_best_val_loss_var.pkl
+
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
