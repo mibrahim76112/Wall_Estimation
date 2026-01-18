@@ -1,55 +1,50 @@
-Wall Length Estimator – Backend API
+# Wall Length Estimator - Backend API
 
 This repository contains the backend service for estimating wall lengths from architectural floor plan PDFs.
 
-⚠️ IMPORTANT
-The pretrained model weight file is NOT included in this GitHub repository.
+⚠️ **IMPORTANT**  
+The pretrained model weight file is **NOT included** in this GitHub repository.  
 It must be downloaded manually and placed correctly, otherwise the backend will not run.
 
 This backend is designed to be consumed by a website frontend (React, Next.js, etc.).
 
-What This Backend Does
+---
 
-Accepts a floor plan PDF
+## What This Backend Does
 
-Converts the selected PDF page into an image
+1. Accepts a floor plan PDF
+2. Converts the selected PDF page into an image
+3. Runs a pretrained CubiCasa segmentation model (wall label 23 only)
+4. Detects wall geometry
+5. Computes:
+   - Total wall length
+   - Outer perimeter length
+   - Inner wall length = total - outer
+6. Returns results as JSON
+7. Saves debug images for visual verification
 
-Runs a pretrained CubiCasa segmentation model
+---
 
-Detects wall geometry
+## Tech Stack
 
-Computes:
+- FastAPI (REST API)
+- PyTorch (model inference)
+- PyMuPDF (PDF rendering, no Poppler required)
+- OpenCV + scikit-image (geometry processing)
+- Uvicorn (development server)
 
-Total wall length
+---
 
-Outer perimeter length
+## Repository Structure
 
-Inner wall length = total − outer
-
-Returns results as JSON
-
-Saves debug images for visual verification
-
-Tech Stack
-
-FastAPI (REST API)
-
-PyTorch (model inference)
-
-PyMuPDF (PDF rendering, no Poppler required)
-
-OpenCV + scikit-image (geometry processing)
-
-Uvicorn (development server)
-
-Repository Structure
+```text
 Wall_length_estimater/
 │
 ├── app/
 │   ├── api.py              # FastAPI endpoint
 │   ├── pipeline.py         # Core wall-length logic
 │   ├── model_loader.py     # Loads pretrained model
-│   ├── pdf_render.py       # PDF → image (PyMuPDF)
+│   ├── pdf_render.py       # PDF -> image (PyMuPDF)
 │   ├── preprocess.py
 │   ├── wall_lines.py
 │   ├── outer_contour.py
@@ -57,7 +52,7 @@ Wall_length_estimater/
 │   └── units.py
 │
 ├── vendor/
-│   └── floortrans/         
+│   └── floortrans/         # CubiCasa model architecture code
 │
 ├── weights/                # NOT included in GitHub
 │   └── model_best_val_loss_var.pkl
