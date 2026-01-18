@@ -2,10 +2,6 @@
 
 This repository contains the backend service for estimating wall lengths from architectural floor plan PDFs.
 
-⚠️ **IMPORTANT**  
-The pretrained model weight file is **NOT included** in this GitHub repository.  
-It must be downloaded manually and placed correctly, otherwise the backend will not run.
-
 ---
 
 ## What This Backend Does
@@ -62,34 +58,6 @@ Wall_length_estimater/
 └── README.md
 ```
 
-REQUIRED MANUAL STEP (VERY IMPORTANT)
-1. Download Model Weights (NOT in GitHub)
-
-This project WILL NOT RUN without the pretrained model weights.
-
-You must download the file:
-
-model_best_val_loss_var.pkl
-
-
-Download link (Google Drive):
-https://drive.google.com/file/d/13Mi2SkrQTqUYUcMlTlMVEOuQMDzyZb_R/view?usp=sharing
-
-After downloading, place the file exactly at:
-
-weights/model_best_val_loss_var.pkl
-
-
-If this file is missing or named incorrectly, the server will crash on startup.
-
-2. Required Vendor Code Fix (Already Applied)
-
-Ensure the following line is disabled in:
-
-vendor/floortrans/models/init.py
-
-# model.init_weights()
-
 
 Installation (Windows)
 1. Clone this Repository
@@ -99,7 +67,21 @@ cd Wall_length_estimater
 
 ```
 
-cd Wall_length_estimater
+This project WILL NOT RUN without the pretrained model weights.
+
+You must download the file:  
+
+model_best_val_loss_var.pkl
+
+
+Download link:
+https://drive.google.com/file/d/13Mi2SkrQTqUYUcMlTlMVEOuQMDzyZb_R/view?usp=sharing
+
+After downloading, place the file exactly at:
+
+weights/model_best_val_loss_var.pkl
+
+
 
 2. Create Virtual Environment
 ```
