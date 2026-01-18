@@ -91,33 +91,38 @@ vendor/floortrans/models/init.py
 # model.init_weights()
 
 
-If CubiCasa is re-downloaded or updated, this fix must be reapplied.
-
 Installation (Windows)
 1. Clone this Repository
-
+```
 git clone https://github.com/mibrahim76112/Wall_Estimation.git
+cd Wall_length_estimater
+
+```
 
 cd Wall_length_estimater
 
 2. Create Virtual Environment
+```
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
+```
 
 
 If activation is blocked:
-
+```
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```
 
 3. Install Dependencies
+```
 pip install -r requirements.txt
-
-
-No Poppler installation is required.
-PDF rendering uses PyMuPDF.
+```
 
 Running the Backend
+```
 uvicorn app.api:app --reload --port 8000
+
+```
 
 
 API URL:
@@ -175,10 +180,7 @@ Backend returns JSON
 
 Frontend displays:
 
-Total wall length
-
 Outer perimeter length
 
 Inner wall length
 
-Optional debug overlay images
