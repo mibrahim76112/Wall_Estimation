@@ -6,8 +6,6 @@ This repository contains the backend service for estimating wall lengths from ar
 The pretrained model weight file is **NOT included** in this GitHub repository.  
 It must be downloaded manually and placed correctly, otherwise the backend will not run.
 
-This backend is designed to be consumed by a website frontend (React, Next.js, etc.).
-
 ---
 
 ## What This Backend Does
@@ -62,6 +60,7 @@ Wall_length_estimater/
 │
 ├── requirements.txt
 └── README.md
+
 
 REQUIRED MANUAL STEP (VERY IMPORTANT)
 1. Download Model Weights (NOT in GitHub)
