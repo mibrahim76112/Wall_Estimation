@@ -33,6 +33,7 @@ It must be downloaded manually and placed correctly, otherwise the backend will 
 
 ---
 
+```md
 ## Repository Structure
 
 ```text
@@ -63,8 +64,7 @@ Wall_length_estimater/
 
 ---
 
-## REQUIRED MANUAL STEP (VERY IMPORTANT)
-
+REQUIRED MANUAL STEP (VERY IMPORTANT)
 1. Download Model Weights (NOT in GitHub)
 
 This project WILL NOT RUN without the pretrained model weights.
