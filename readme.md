@@ -117,7 +117,7 @@ API Endpoint (For Website Integration)
 POST /estimate
 
 Form Data Parameters
-
+```text
 Field	Type	Required	Description
 pdf	File	Yes	Floor plan PDF
 page_index	Integer	No	Page number (default: 0)
@@ -133,7 +133,7 @@ Example API Response
   "lines_overlay_path": "outputs/uuid/lines_overlay.png",
   "outer_overlay_path": "outputs/uuid/outer_overlay.png"
 }
-
+```
 Debug Images (Manual Verification)
 
 For every request, the backend saves:
