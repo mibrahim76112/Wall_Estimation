@@ -33,7 +33,6 @@ It must be downloaded manually and placed correctly, otherwise the backend will 
 
 ---
 
-```md
 ## Repository Structure
 
 ```text
