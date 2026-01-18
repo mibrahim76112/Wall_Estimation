@@ -60,8 +60,7 @@ Wall_length_estimater/
 │
 ├── requirements.txt
 └── README.md
-
----
+```
 
 REQUIRED MANUAL STEP (VERY IMPORTANT)
 1. Download Model Weights (NOT in GitHub)
