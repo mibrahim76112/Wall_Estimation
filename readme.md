@@ -14,7 +14,7 @@ Accepts a floor plan PDF
 
 Converts the selected PDF page into an image
 
-Runs a pretrained CubiCasa segmentation model (wall label 23 only)
+Runs a pretrained CubiCasa segmentation model
 
 Detects wall geometry
 
@@ -57,7 +57,7 @@ Wall_length_estimater/
 │   └── units.py
 │
 ├── vendor/
-│   └── floortrans/         # CubiCasa model architecture code
+│   └── floortrans/         
 │
 ├── weights/                # NOT included in GitHub
 │   └── model_best_val_loss_var.pkl
@@ -90,13 +90,6 @@ If this file is missing or named incorrectly, the server will crash on startup.
 
 2. Required Vendor Code Fix (Already Applied)
 
-The original CubiCasa code attempts to load this file:
-
-floortrans/models/model_1427.pth
-
-
-That file is NOT required and NOT included.
-
 Ensure the following line is disabled in:
 
 vendor/floortrans/models/init.py
@@ -107,8 +100,10 @@ vendor/floortrans/models/init.py
 If CubiCasa is re-downloaded or updated, this fix must be reapplied.
 
 Installation (Windows)
-1. Clone the Repository
-git clone <your-github-repo-url>
+1. Clone this Repository
+
+git clone https://github.com/mibrahim76112/Wall_Estimation.git
+
 cd Wall_length_estimater
 
 2. Create Virtual Environment
