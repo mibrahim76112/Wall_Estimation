@@ -166,3 +166,54 @@ Outer perimeter length
 
 Inner wall length
 
+
+
+
+## Cloud Deployment (Production API)
+
+This backend is deployed on Google Cloud Run and is publicly accessible.
+
+Production API Base URL:
+```
+https://wall-length-api-933979738822.us-central1.run.app
+```
+Swagger UI (Live):
+```
+https://wall-length-api-933979738822.us-central1.run.app/docs
+```
+
+Production API Endpoint
+
+POST /estimate
+
+Full URL:
+```
+https://wall-length-api-933979738822.us-central1.run.app/estimate
+```
+
+Request Format (multipart/form-data)
+
+Field                 Type     Required   Description
+pdf                   File     Yes        Floor plan PDF
+page_index             Int      No         Page index (default: 0)
+scale_inch_per_foot    String   No         Example: 3/16
+
+
+Example JavaScript Request (Frontend)
+
+const form = new FormData();
+form.append("pdf", file);
+form.append("page_index", "0");
+form.append("scale_inch_per_foot", "3/16");
+
+const response = await fetch(
+  "https://wall-length-api-933979738822.us-central1.run.app/estimate",
+  {
+    method: "POST",
+    body: form,
+  }
+);
+
+const data = await response.json();
+console.log(data);
+
