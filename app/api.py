@@ -34,30 +34,42 @@ MAX_PAGES = int(os.getenv("MAX_PDF_PAGES", "3"))
 app = FastAPI()
 model = None
 
-
 def _download_weights_if_missing() -> None:
     LOCAL_WEIGHTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    # Use local weights if present
     if LOCAL_WEIGHTS_PATH.exists() and LOCAL_WEIGHTS_PATH.stat().st_size > 0:
+        print(f"Weights found locally: {LOCAL_WEIGHTS_PATH} ({LOCAL_WEIGHTS_PATH.stat().st_size} bytes)")
         return
 
+    # Otherwise download from GCS
     if not MODEL_BUCKET or not MODEL_OBJECT:
-        # Let the container start so Cloud Run can deploy revisions.
-        # The endpoint will return a clear error until env vars are fixed.
-        return
+        raise RuntimeError("MODEL_BUCKET and MODEL_OBJECT env vars must be set.")
 
+    print(f"Downloading weights gs://{MODEL_BUCKET}/{MODEL_OBJECT} -> {LOCAL_WEIGHTS_PATH}")
     client = storage.Client()
     blob = client.bucket(MODEL_BUCKET).blob(MODEL_OBJECT)
     blob.download_to_filename(str(LOCAL_WEIGHTS_PATH))
+    print("Download complete.")
 
 
 @app.on_event("startup")
 def _startup() -> None:
     global model
+    print("Startup: begin")
     _download_weights_if_missing()
+
     if not LOCAL_WEIGHTS_PATH.exists():
-        print("Weights not downloaded yet (missing MODEL_BUCKET/MODEL_OBJECT).")
-        return
+        raise RuntimeError(f"Startup failed: weights not found at {LOCAL_WEIGHTS_PATH}")
+
+    size = LOCAL_WEIGHTS_PATH.stat().st_size
+    print(f"Startup: weights at {LOCAL_WEIGHTS_PATH} size={size}")
+
+    if size < 1024 * 1024:  # 1MB sanity check, adjust if needed
+        raise RuntimeError(f"Startup failed: weights file too small ({size} bytes)")
+
     model = load_cubicasa_model(str(LOCAL_WEIGHTS_PATH), device=device)
+    print("Startup: model loaded OK")
 
 
 async def _save_upload_with_limit(upload: UploadFile, dst_path: Path, max_bytes: int) -> int:
