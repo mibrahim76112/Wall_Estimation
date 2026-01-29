@@ -102,7 +102,8 @@ pip install -r requirements.txt
 
 Running the Backend
 ```
-uvicorn app.api:app --reload --port 8000
+python -m uvicorn app.api:app --reload --port 8000
+
 
 ```
 
